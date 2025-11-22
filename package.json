@@ -1,0 +1,31 @@
+{
+  "name": "@konlab/user",
+  "version": "1.0.0",
+  "description": "",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "dev": "tsup --watch --dts",
+    "build": "tsup",
+    "lint": "eslint .",
+    "clean": "rimraf dist",
+    "playground:dev": "pnpm --filter playground dev",
+    "playground:build": "pnpm --filter playground build"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "pnpm": {
+    "overrides": {
+      "react": "^18.3.1",
+      "react-dom": "^18.3.1",
+      "@types/react": "^18.3.12",
+      "@types/react-dom": "^18.3.1"
+    }
+  },
+  "engines": {
+    "node": ">=18.18.0",
+    "pnpm": ">=9"
+  },
+  "packageManager": "pnpm@10.2.1"
+}
