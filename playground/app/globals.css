@@ -1,5 +1,5 @@
-@source "./**/*.{ts,tsx,js,jsx,mdx}";
-@source "../../packages/konlab-ui/src/**/*.{ts,tsx,js,jsx,mdx}";
-@source "../../src/**/*.{ts,tsx,js,jsx,mdx}";
+@source './**/*.{ts,tsx,js,jsx,mdx}';
+@source '../../packages/konlab-ui/src/**/*.{ts,tsx,js,jsx,mdx}';
+@source '../../src/**/*.{ts,tsx,js,jsx,mdx}';
 
-@import "@konlab/ui/styles/globals.css";
+@import '@konlab/ui/styles/globals.css';

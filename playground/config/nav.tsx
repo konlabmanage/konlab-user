@@ -1,35 +1,34 @@
-'use client'
+'use client';
 
-import { Home, Users, Settings, FileText } from "lucide-react";
-import { type SidebarMenuGroup } from "@konlab/ui/layouts/cms";
+import { Home, Users, Settings, FileText } from 'lucide-react';
+import { type SidebarMenuGroupType } from '@konlab/ui/layouts/cms';
 
-export const menuItems: SidebarMenuGroup[] = [
+export const mainNavItems: SidebarMenuGroupType[] = [
   {
-    label: "Application",
     items: [
       {
-        title: "Trang chủ",
-        url: "/",
+        title: 'Trang chủ',
+        url: '/',
         icon: Home,
       },
       {
-        title: "Người dùng",
-        url: "/cms/users",
+        title: 'Người dùng',
+        url: '/cms/users',
         icon: Users,
       },
       {
-        title: "Bài viết",
-        url: "/cms/posts",
+        title: 'Bài viết',
+        url: '/cms/posts',
         icon: FileText,
       },
     ],
   },
   {
-    label: "Settings",
+    label: 'Settings',
     items: [
       {
-        title: "Cài đặt",
-        url: "/cms/settings",
+        title: 'Cài đặt',
+        url: '/cms/settings',
         icon: Settings,
       },
     ],

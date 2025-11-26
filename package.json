@@ -8,6 +8,8 @@
     "dev": "tsup --watch --dts",
     "build": "tsup",
     "lint": "eslint .",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
     "clean": "rimraf dist",
     "playground:dev": "pnpm --filter playground dev",
     "playground:build": "pnpm --filter playground build"
@@ -27,5 +29,9 @@
     "node": ">=18.18.0",
     "pnpm": ">=9"
   },
-  "packageManager": "pnpm@10.2.1"
+  "packageManager": "pnpm@10.2.1",
+  "devDependencies": {
+    "prettier": "^3.6.2",
+    "prettier-plugin-tailwindcss": "^0.7.1"
+  }
 }
