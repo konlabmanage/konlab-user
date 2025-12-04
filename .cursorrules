@@ -1,0 +1,5 @@
+# File Generation Rules
+
+1.  **No Markdown Files:** You are strictly PROHIBITED from creating, generating, or suggesting new Markdown (`.md`) files.
+2.  **Exception:** The ONLY allowed Markdown file is `README.md`. You may create or edit `README.md` if requested.
+3.  **Alternative:** If you need to explain code or provide documentation, use code comments or provide the explanation in the chat interface, do not create a file for it.

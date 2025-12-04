@@ -12,7 +12,6 @@ import { SetBreadcrumbs } from '@konlab/ui/layouts/shared';
 export default function Home() {
   return (
     <>
-      <SetBreadcrumbs items={[{ label: 'Trang chủ' }]} />
       <div className="flex flex-col items-center gap-8">
         <div className="flex flex-col items-center gap-6 text-center">
           <h1 className="text-4xl font-bold tracking-tight">Konlab UI Playground</h1>
