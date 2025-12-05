@@ -7,3 +7,6 @@
     path = packages/konlab-auth
     url = https://github.com/konlabmanage/konlab-auth.git
     branch = main
+[submodule "packages/konlab-shared"]
+	path = packages/konlab-shared
+	url = https://github.com/konlabmanage/konlab-shared.git

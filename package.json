@@ -30,7 +30,15 @@
     "pnpm": ">=9"
   },
   "packageManager": "pnpm@10.2.1",
+  "peerDependencies": {
+    "@konlab/shared": "workspace:*",
+    "@konlab/ui": "workspace:*",
+    "@konlab/auth": "workspace:*"
+  },
   "devDependencies": {
+    "@konlab/shared": "workspace:*",
+    "@konlab/ui": "workspace:*",
+    "@konlab/auth": "workspace:*",
     "prettier": "^3.6.2",
     "prettier-plugin-tailwindcss": "^0.7.1"
   }

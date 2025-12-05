@@ -8,6 +8,7 @@ const nextConfig: NextConfig = {
   webpack: (config) => {
     config.resolve.alias = {
       ...config.resolve.alias,
+      '@': resolve(__dirname, '.'),
       '@konlab/ui': resolve(__dirname, '../packages/konlab-ui/src'),
       '@konlab/auth': resolve(__dirname, '../packages/konlab-auth/src'),
     };
