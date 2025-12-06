@@ -2,7 +2,6 @@
     path = packages/konlab-ui
     url = https://github.com/konlabmanage/konlab-ui.git
     branch = main
-
 [submodule "packages/konlab-auth"]
     path = packages/konlab-auth
     url = https://github.com/konlabmanage/konlab-auth.git
@@ -10,3 +9,5 @@
 [submodule "packages/konlab-shared"]
 	path = packages/konlab-shared
 	url = https://github.com/konlabmanage/konlab-shared.git
+	branch = main
+     branch = main

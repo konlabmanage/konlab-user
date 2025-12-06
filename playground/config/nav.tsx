@@ -1,6 +1,6 @@
 'use client';
 
-import { Home, Users, Shield, Building, Key } from 'lucide-react';
+import { Home, Users, Shield, Building, Key, User } from 'lucide-react';
 import { type SidebarMenuGroupType } from '@konlab/ui/layouts/cms';
 
 export const mainNavItems: SidebarMenuGroupType[] = [
@@ -10,6 +10,11 @@ export const mainNavItems: SidebarMenuGroupType[] = [
         title: 'Trang chủ',
         url: '/',
         icon: Home,
+      },
+      {
+        title: 'Hồ sơ',
+        url: '/profile',
+        icon: User,
       },
     ],
   },

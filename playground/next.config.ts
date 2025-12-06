@@ -3,12 +3,13 @@ import { resolve } from 'node:path';
 
 const nextConfig: NextConfig = {
   reactStrictMode: true,
-  transpilePackages: ['@konlab/ui', '@konlab/auth'],
+  transpilePackages: ['@konlab/ui', '@konlab/auth', '@konlab/user'],
 
   webpack: (config) => {
     config.resolve.alias = {
       ...config.resolve.alias,
       '@': resolve(__dirname, '.'),
+      '@konlab/user': resolve(__dirname, '../src'),
       '@konlab/ui': resolve(__dirname, '../packages/konlab-ui/src'),
       '@konlab/auth': resolve(__dirname, '../packages/konlab-auth/src'),
     };

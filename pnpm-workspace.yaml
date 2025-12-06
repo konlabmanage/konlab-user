@@ -1,4 +1,7 @@
+# PNPM Workspace Configuration
+# Only include top-level packages to avoid conflicts with git submodules
+# Submodules have their own pnpm-workspace.yaml with packages: [] to prevent nested workspace detection
 packages:
-  - '.'
+  - 'src'
   - 'playground'
   - 'packages/*'
