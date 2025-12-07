@@ -1,15 +1,16 @@
 {
   "extends": "@konlab/shared/configs/tsconfig/react",
   "compilerOptions": {
+    "baseUrl": ".",
     "paths": {
-      "@konlab/ui": ["./src/index.ts"],
-      "@konlab/ui/*": ["./src/*"],  
+      "@konlab/ui": ["./packages/konlab-ui/src/index.ts"],
+      "@konlab/ui/*": ["./packages/konlab-ui/src/*"],
       "@konlab/auth": ["./packages/konlab-auth/src/index.ts"],
       "@konlab/auth/*": ["./packages/konlab-auth/src/*"],
       "@konlab/shared": ["./packages/konlab-shared/src/index.ts"],
       "@konlab/shared/*": ["./packages/konlab-shared/src/*"]
     }
   },
-  "include": ["packages/**/*", "playground/**/*"],
+  "include": ["packages/**/*", "playground/**/*", "src/**/*"],
   "exclude": ["node_modules", "dist", "storybook-static", "src/stories"]
 }

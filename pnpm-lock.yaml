@@ -371,6 +371,9 @@ importers:
 
   playground:
     dependencies:
+      '@hookform/resolvers':
+        specifier: ^3.0.0
+        version: 3.10.0(react-hook-form@7.66.1(react@18.3.1))
       '@konlab/auth':
         specifier: workspace:*
         version: link:../packages/konlab-auth
@@ -389,6 +392,15 @@ importers:
       react-dom:
         specifier: ^18.3.1
         version: 18.3.1(react@18.3.1)
+      react-hook-form:
+        specifier: ^7.0.0
+        version: 7.66.1(react@18.3.1)
+      sonner:
+        specifier: ^2.0.7
+        version: 2.0.7(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+      zod:
+        specifier: ^4.1.12
+        version: 4.1.12
     devDependencies:
       '@tailwindcss/postcss':
         specifier: ^4
@@ -1044,6 +1056,11 @@ packages:
 
   '@floating-ui/utils@0.2.10':
     resolution: {integrity: sha512-aGTxbpbg8/b5JfU1HXSrbH3wXZuLPJcNEcZQFMxLs3oSzgtVu6nFPkbbGGUvBcUjKV2YyB9Wxxabo+HEH9tcRQ==}
+
+  '@hookform/resolvers@3.10.0':
+    resolution: {integrity: sha512-79Dv+3mDF7i+2ajj7SkypSKHhl1cbln1OGavqrsF7p6mbUv11xpqpacPsGDCTRvCSjEEIez2ef1NveSVL3b0Ag==}
+    peerDependencies:
+      react-hook-form: ^7.0.0
 
   '@hookform/resolvers@5.2.2':
     resolution: {integrity: sha512-A/IxlMLShx3KjV/HeTcTfaMxdwy690+L/ZADoeaTltLx+CVuzkeVIPuybK3jrRfw7YZnmdKsVVHAlEPIAEUNlA==}
@@ -6376,6 +6393,10 @@ snapshots:
       react-dom: 18.3.1(react@18.3.1)
 
   '@floating-ui/utils@0.2.10': {}
+
+  '@hookform/resolvers@3.10.0(react-hook-form@7.66.1(react@18.3.1))':
+    dependencies:
+      react-hook-form: 7.66.1(react@18.3.1)
 
   '@hookform/resolvers@5.2.2(react-hook-form@7.66.1(react@18.3.1))':
     dependencies:

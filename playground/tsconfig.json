@@ -1,6 +1,7 @@
 {
   "extends": "@konlab/shared/configs/tsconfig/next",
   "compilerOptions": {
+    "baseUrl": ".",
     "plugins": [
       {
         "name": "next"
@@ -21,6 +22,15 @@
       ],
       "@konlab/auth/*": [
         "../packages/konlab-auth/src/*"
+      ],
+      "@konlab/shared": [
+        "../packages/konlab-shared/src/index.ts"
+      ],
+      "@konlab/shared/*": [
+        "../packages/konlab-shared/src/*"
+      ],
+      "@konlab/user/*": [
+        "../src/*"
       ]
     },
     "allowJs": true,
