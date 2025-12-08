@@ -6,11 +6,6 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import * as z from 'zod';
 import {
   Button,
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
   Form,
   FormControl,
   FormField,
@@ -19,6 +14,7 @@ import {
   FormMessage,
   Input,
 } from '@konlab/ui/components';
+import { useLayoutContext } from '@konlab/ui/layouts/shared';
 import type { AuthUser } from '@konlab/auth';
 import { toast } from 'sonner';
 
@@ -37,6 +33,8 @@ interface ProfileInfoFormProps {
 
 export function ProfileInfoForm({ user }: ProfileInfoFormProps) {
   const [isLoading, setIsLoading] = useState(false);
+  const { page } = useLayoutContext();
+  const { Header: PageHeader, Title: PageTitle, Subtitle: PageSubtitle } = page;
 
   const form = useForm<ProfileFormValues>({
     resolver: zodResolver(profileSchema),
@@ -53,7 +51,7 @@ export function ProfileInfoForm({ user }: ProfileInfoFormProps) {
     try {
       // TODO: Replace with actual API call
       await new Promise((resolve) => setTimeout(resolve, 1000));
-      
+
       toast.success('Cập nhật thông tin thành công');
       console.log('Profile data:', data);
     } catch (error) {
@@ -67,12 +65,12 @@ export function ProfileInfoForm({ user }: ProfileInfoFormProps) {
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
-        <CardHeader>
-          <CardTitle>Cập nhật thông tin</CardTitle>
-          <CardDescription>Cập nhật thông tin cá nhân của bạn</CardDescription>
-        </CardHeader>
-        
-        <CardContent className="space-y-4">
+        <PageHeader>
+          <PageTitle level={2}>Cập nhật thông tin</PageTitle>
+          <PageSubtitle>Cập nhật thông tin cá nhân của bạn</PageSubtitle>
+        </PageHeader>
+
+        <div className="space-y-4">
           <FormField
             control={form.control}
             name="name"
@@ -137,9 +135,8 @@ export function ProfileInfoForm({ user }: ProfileInfoFormProps) {
               {isLoading ? 'Đang lưu...' : 'Lưu thay đổi'}
             </Button>
           </div>
-        </CardContent>
+        </div>
       </form>
     </Form>
   );
 }
-

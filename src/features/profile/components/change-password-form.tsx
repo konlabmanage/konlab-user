@@ -6,11 +6,6 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import * as z from 'zod';
 import {
   Button,
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
   Form,
   FormControl,
   FormField,
@@ -19,6 +14,7 @@ import {
   FormMessage,
   Input,
 } from '@konlab/ui/components';
+import { useLayoutContext } from '@konlab/ui/layouts/shared';
 import { toast } from 'sonner';
 import { Eye, EyeOff } from 'lucide-react';
 
@@ -40,6 +36,8 @@ export function ChangePasswordForm() {
   const [showCurrentPassword, setShowCurrentPassword] = useState(false);
   const [showNewPassword, setShowNewPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+  const { page } = useLayoutContext();
+  const { Header: PageHeader, Title: PageTitle, Subtitle: PageSubtitle } = page;
 
   const form = useForm<ChangePasswordFormValues>({
     resolver: zodResolver(changePasswordSchema),
@@ -50,12 +48,12 @@ export function ChangePasswordForm() {
     },
   });
 
-  const onSubmit = async (data: ChangePasswordFormValues) => {
+  const onSubmit = async (_data: ChangePasswordFormValues) => {
     setIsLoading(true);
     try {
       // TODO: Replace with actual API call
       await new Promise((resolve) => setTimeout(resolve, 1000));
-      
+
       toast.success('Đổi mật khẩu thành công');
       form.reset();
       console.log('Password change data:', { currentPassword: '***', newPassword: '***' });
@@ -70,14 +68,14 @@ export function ChangePasswordForm() {
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
-        <CardHeader>
-          <CardTitle>Đổi mật khẩu</CardTitle>
-          <CardDescription>
+        <PageHeader>
+          <PageTitle level={2}>Đổi mật khẩu</PageTitle>
+          <PageSubtitle>
             Thay đổi mật khẩu của bạn. Mật khẩu mới phải có ít nhất 8 ký tự.
-          </CardDescription>
-        </CardHeader>
-        
-        <CardContent className="space-y-4">
+          </PageSubtitle>
+        </PageHeader>
+
+        <div className="space-y-4">
           <FormField
             control={form.control}
             name="currentPassword"
@@ -94,7 +92,7 @@ export function ChangePasswordForm() {
                     <button
                       type="button"
                       onClick={() => setShowCurrentPassword(!showCurrentPassword)}
-                      className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground"
+                      className="text-muted-foreground hover:text-foreground absolute top-1/2 right-3 -translate-y-1/2"
                     >
                       {showCurrentPassword ? (
                         <EyeOff className="h-4 w-4" />
@@ -125,7 +123,7 @@ export function ChangePasswordForm() {
                     <button
                       type="button"
                       onClick={() => setShowNewPassword(!showNewPassword)}
-                      className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground"
+                      className="text-muted-foreground hover:text-foreground absolute top-1/2 right-3 -translate-y-1/2"
                     >
                       {showNewPassword ? (
                         <EyeOff className="h-4 w-4" />
@@ -156,7 +154,7 @@ export function ChangePasswordForm() {
                     <button
                       type="button"
                       onClick={() => setShowConfirmPassword(!showConfirmPassword)}
-                      className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground"
+                      className="text-muted-foreground hover:text-foreground absolute top-1/2 right-3 -translate-y-1/2"
                     >
                       {showConfirmPassword ? (
                         <EyeOff className="h-4 w-4" />
@@ -179,9 +177,8 @@ export function ChangePasswordForm() {
               {isLoading ? 'Đang đổi mật khẩu...' : 'Đổi mật khẩu'}
             </Button>
           </div>
-        </CardContent>
+        </div>
       </form>
     </Form>
   );
 }
-

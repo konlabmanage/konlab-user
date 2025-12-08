@@ -1,15 +1,8 @@
 'use client';
 
 import { useState } from 'react';
-import {
-  Button,
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-  Switch,
-} from '@konlab/ui/components';
+import { Button, Switch } from '@konlab/ui/components';
+import { useLayoutContext } from '@konlab/ui/layouts/shared';
 import { toast } from 'sonner';
 import { Shield, Smartphone, Key } from 'lucide-react';
 
@@ -20,6 +13,8 @@ export function TwoFactorAuthForm() {
   const [qrCode, setQrCode] = useState<string | null>(null);
   const [secret, setSecret] = useState<string | null>(null);
   const [verificationCode, setVerificationCode] = useState('');
+  const { page } = useLayoutContext();
+  const { Header: PageHeader, Title: PageTitle, Subtitle: PageSubtitle } = page;
 
   const handleToggle2FA = async (enabled: boolean) => {
     if (enabled && isEnabled) {
@@ -33,12 +28,12 @@ export function TwoFactorAuthForm() {
       try {
         // TODO: Replace with actual API call
         await new Promise((resolve) => setTimeout(resolve, 1000));
-        
+
         setIsEnabled(false);
         setShowSetup(false);
         setQrCode(null);
         setSecret(null);
-        
+
         toast.success('Đã tắt xác thực 2 lớp');
       } catch (error) {
         toast.error('Có lỗi xảy ra khi tắt xác thực 2 lớp');
@@ -54,10 +49,12 @@ export function TwoFactorAuthForm() {
     try {
       // TODO: Replace with actual API call to get QR code and secret
       await new Promise((resolve) => setTimeout(resolve, 1000));
-      
+
       setShowSetup(true);
       // TODO: Get QR code and secret from API
-      setQrCode('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCIgZmlsbD0iI2YzZjRmNiIvPjx0ZXh0IHg9IjUwJSIgeT0iNTAlIiBmb250LWZhbWlseT0iQXJpYWwiIGZvbnQtc2l6ZT0iMTQiIGZpbGw9IiM2YjcyODAiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGR5PSIuM2VtIj5RUiBDb2RlIFBsYWNlaG9sZGVyPC90ZXh0Pjwvc3ZnPg==');
+      setQrCode(
+        'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCIgZmlsbD0iI2YzZjRmNiIvPjx0ZXh0IHg9IjUwJSIgeT0iNTAlIiBmb250LWZhbWlseT0iQXJpYWwiIGZvbnQtc2l6ZT0iMTQiIGZpbGw9IiM2YjcyODAiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGR5PSIuM2VtIj5RUiBDb2RlIFBsYWNlaG9sZGVyPC90ZXh0Pjwvc3ZnPg==',
+      );
       setSecret('JBSWY3DPEHPK3PXP');
     } catch (error) {
       toast.error('Có lỗi xảy ra khi lấy mã QR');
@@ -77,13 +74,13 @@ export function TwoFactorAuthForm() {
     try {
       // TODO: Replace with actual API call
       await new Promise((resolve) => setTimeout(resolve, 1000));
-      
+
       setIsEnabled(true);
       setShowSetup(false);
       setVerificationCode('');
       setQrCode(null);
       setSecret(null);
-      
+
       toast.success('Xác thực thành công! Xác thực 2 lớp đã được kích hoạt.');
     } catch (error) {
       toast.error('Mã xác thực không đúng');
@@ -95,15 +92,15 @@ export function TwoFactorAuthForm() {
 
   return (
     <div className="space-y-6">
-      <CardHeader>
-        <CardTitle>Xác thực 2 lớp</CardTitle>
-        <CardDescription>
-          Bảo vệ tài khoản của bạn bằng xác thực 2 lớp. Bạn sẽ cần nhập mã từ ứng dụng xác thực
-          mỗi khi đăng nhập.
-        </CardDescription>
-      </CardHeader>
+      <PageHeader>
+        <PageTitle level={2}>Xác thực 2 lớp</PageTitle>
+        <PageSubtitle>
+          Bảo vệ tài khoản của bạn bằng xác thực 2 lớp. Bạn sẽ cần nhập mã từ ứng dụng xác thực mỗi
+          khi đăng nhập.
+        </PageSubtitle>
+      </PageHeader>
 
-      <CardContent className="space-y-6">
+      <div className="space-y-6">
         {/* Toggle Switch */}
         <div className="flex items-center justify-between rounded-lg border p-4">
           <div className="flex items-center gap-3">
@@ -117,26 +114,22 @@ export function TwoFactorAuthForm() {
               </p>
             </div>
           </div>
-          <Switch
-            checked={isEnabled}
-            onCheckedChange={handleToggle2FA}
-            disabled={isLoading}
-          />
+          <Switch checked={isEnabled} onCheckedChange={handleToggle2FA} disabled={isLoading} />
         </div>
 
         {/* Setup Instructions */}
         {showSetup && (
-          <Card>
-            <CardHeader>
-              <CardTitle className="flex items-center gap-2">
+          <div className="rounded-lg border p-6">
+            <div className="mb-4">
+              <h3 className="mb-2 flex items-center gap-2 text-lg font-semibold">
                 <Smartphone className="h-5 w-5" />
                 Thiết lập xác thực 2 lớp
-              </CardTitle>
-              <CardDescription>
+              </h3>
+              <p className="text-muted-foreground text-sm">
                 Quét mã QR bằng ứng dụng xác thực như Google Authenticator hoặc Authy
-              </CardDescription>
-            </CardHeader>
-            <CardContent className="space-y-4">
+              </p>
+            </div>
+            <div className="space-y-4">
               {/* QR Code */}
               {qrCode && (
                 <div className="flex flex-col items-center gap-4">
@@ -146,7 +139,7 @@ export function TwoFactorAuthForm() {
                   {secret && (
                     <div className="text-center">
                       <p className="text-muted-foreground text-sm">Hoặc nhập mã thủ công:</p>
-                      <p className="font-mono mt-1 text-lg font-semibold">{secret}</p>
+                      <p className="mt-1 font-mono text-lg font-semibold">{secret}</p>
                     </div>
                   )}
                 </div>
@@ -162,7 +155,7 @@ export function TwoFactorAuthForm() {
                     value={verificationCode}
                     onChange={(e) => setVerificationCode(e.target.value.replace(/\D/g, ''))}
                     placeholder="000000"
-                    className="border-input focus-visible:ring-ring flex h-10 w-full rounded-md border bg-transparent px-3 py-2 text-center text-lg font-mono tracking-widest shadow-sm transition-colors focus-visible:outline-none focus-visible:ring-1 disabled:cursor-not-allowed disabled:opacity-50"
+                    className="border-input focus-visible:ring-ring flex h-10 w-full rounded-md border bg-transparent px-3 py-2 text-center font-mono text-lg tracking-widest shadow-sm transition-colors focus-visible:ring-1 focus-visible:outline-none disabled:cursor-not-allowed disabled:opacity-50"
                   />
                   <Button
                     type="button"
@@ -174,27 +167,24 @@ export function TwoFactorAuthForm() {
                   </Button>
                 </div>
               </div>
-            </CardContent>
-          </Card>
+            </div>
+          </div>
         )}
 
         {/* Enabled State */}
         {isEnabled && !showSetup && (
-          <Card>
-            <CardContent className="pt-6">
-              <div className="flex items-center gap-3 text-green-600 dark:text-green-400">
-                <Shield className="h-5 w-5" />
-                <p className="font-medium">Xác thực 2 lớp đã được kích hoạt</p>
-              </div>
-              <p className="text-muted-foreground mt-2 text-sm">
-                Tài khoản của bạn đang được bảo vệ bằng xác thực 2 lớp. Bạn có thể tắt tính năng
-                này bất cứ lúc nào.
-              </p>
-            </CardContent>
-          </Card>
+          <div className="rounded-lg border p-6">
+            <div className="flex items-center gap-3 text-green-600 dark:text-green-400">
+              <Shield className="h-5 w-5" />
+              <p className="font-medium">Xác thực 2 lớp đã được kích hoạt</p>
+            </div>
+            <p className="text-muted-foreground mt-2 text-sm">
+              Tài khoản của bạn đang được bảo vệ bằng xác thực 2 lớp. Bạn có thể tắt tính năng này
+              bất cứ lúc nào.
+            </p>
+          </div>
         )}
-      </CardContent>
+      </div>
     </div>
   );
 }
-
