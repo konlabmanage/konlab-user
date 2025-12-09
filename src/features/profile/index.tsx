@@ -61,7 +61,7 @@ export function ProfilePage() {
             <Separator orientation="vertical" className="hidden lg:block" />
 
             {/* Form bên phải */}
-            <PageContent className="flex-1 p-4">
+            <PageContent className="flex-1 p-6">
               <TabsContent value="info" className="mt-0">
                 <ProfileInfoForm user={user} />
               </TabsContent>

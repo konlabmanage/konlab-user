@@ -31,15 +31,18 @@
   },
   "packageManager": "pnpm@10.2.1",
   "peerDependencies": {
+    "@konlab/auth": "workspace:*",
     "@konlab/shared": "workspace:*",
-    "@konlab/ui": "workspace:*",
-    "@konlab/auth": "workspace:*"
+    "@konlab/ui": "workspace:*"
   },
   "devDependencies": {
+    "@konlab/auth": "workspace:*",
     "@konlab/shared": "workspace:*",
     "@konlab/ui": "workspace:*",
-    "@konlab/auth": "workspace:*",
     "prettier": "^3.6.2",
     "prettier-plugin-tailwindcss": "^0.7.1"
+  },
+  "dependencies": {
+    "deepmerge": "^4.3.1"
   }
 }

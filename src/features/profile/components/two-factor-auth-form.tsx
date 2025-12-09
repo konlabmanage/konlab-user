@@ -93,7 +93,7 @@ export function TwoFactorAuthForm() {
   return (
     <div className="space-y-6">
       <PageHeader>
-        <PageTitle level={2}>Xác thực 2 lớp</PageTitle>
+        <PageTitle level={3}>Xác thực 2 lớp</PageTitle>
         <PageSubtitle>
           Bảo vệ tài khoản của bạn bằng xác thực 2 lớp. Bạn sẽ cần nhập mã từ ứng dụng xác thực mỗi
           khi đăng nhập.

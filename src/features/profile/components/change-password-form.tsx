@@ -69,7 +69,7 @@ export function ChangePasswordForm() {
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
         <PageHeader>
-          <PageTitle level={2}>Đổi mật khẩu</PageTitle>
+          <PageTitle level={3}>Đổi mật khẩu</PageTitle>
           <PageSubtitle>
             Thay đổi mật khẩu của bạn. Mật khẩu mới phải có ít nhất 8 ký tự.
           </PageSubtitle>

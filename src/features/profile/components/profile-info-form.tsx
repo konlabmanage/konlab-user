@@ -66,7 +66,7 @@ export function ProfileInfoForm({ user }: ProfileInfoFormProps) {
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
         <PageHeader>
-          <PageTitle level={2}>Cập nhật thông tin</PageTitle>
+          <PageTitle level={3}>Cập nhật thông tin</PageTitle>
           <PageSubtitle>Cập nhật thông tin cá nhân của bạn</PageSubtitle>
         </PageHeader>
 
