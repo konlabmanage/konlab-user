@@ -1,9 +1,8 @@
 import type { Metadata } from 'next';
 import { Manrope } from 'next/font/google';
 import './globals.css';
-import { CMSLayout } from '@konlab/ui/layouts/cms';
+import { AppShell } from '@konlab/user/layouts';
 import { mainNavItems } from '@/config/nav';
-import { Providers } from '@/components/providers';
 import { AppLogo } from '@/components/app-logo';
 
 const manrope = Manrope({
@@ -21,14 +20,25 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const authConfig = {
+    keycloak: {
+      url: process.env.NEXT_PUBLIC_KEYCLOAK_URL,
+      realm: process.env.NEXT_PUBLIC_KEYCLOAK_REALM || '',
+      clientId: process.env.NEXT_PUBLIC_KEYCLOAK_CLIENT_ID || '',
+    },
+    paths: {
+      home: '/',
+      afterLogout: '/',
+    },
+    autoRefreshInterval: 45,
+  };
+
   return (
     <html lang="en">
       <body className={`${manrope.variable} antialiased`}>
-        <Providers>
-          <CMSLayout logo={<AppLogo />} mainNavItems={mainNavItems}>
-            {children}
-          </CMSLayout>
-        </Providers>
+        <AppShell authConfig={authConfig} logo={<AppLogo />} mainNavItems={mainNavItems}>
+          {children}
+        </AppShell>
       </body>
     </html>
   );

@@ -8,30 +8,15 @@
       }
     ],
     "paths": {
-      "@/*": [
-        "./*"
-      ],
-      "@konlab/ui": [
-        "../packages/konlab-ui/src/index.ts"
-      ],
-      "@konlab/ui/*": [
-        "../packages/konlab-ui/src/*"
-      ],
-      "@konlab/auth": [
-        "../packages/konlab-auth/src/index.ts"
-      ],
-      "@konlab/auth/*": [
-        "../packages/konlab-auth/src/*"
-      ],
-      "@konlab/shared": [
-        "../packages/konlab-shared/src/index.ts"
-      ],
-      "@konlab/shared/*": [
-        "../packages/konlab-shared/src/*"
-      ],
-      "@konlab/user/*": [
-        "../src/*"
-      ]
+      "@/*": ["./*"],
+      "@konlab/ui": ["../packages/konlab-ui/src/index.ts"],
+      "@konlab/ui/*": ["../packages/konlab-ui/src/*"],
+      "@konlab/auth": ["../packages/konlab-auth/src/index.ts"],
+      "@konlab/auth/*": ["../packages/konlab-auth/src/*"],
+      "@konlab/shared": ["../packages/konlab-shared/src/index.ts"],
+      "@konlab/shared/*": ["../packages/konlab-shared/src/*"],
+      "@konlab/user": ["../src/index.ts"],
+      "@konlab/user/*": ["../src/*"]
     },
     "allowJs": true,
     "incremental": true,
@@ -45,7 +30,5 @@
     ".next/dev/types/**/*.ts",
     "**/*.mts"
   ],
-  "exclude": [
-    "node_modules"
-  ]
+  "exclude": ["node_modules"]
 }

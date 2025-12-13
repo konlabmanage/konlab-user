@@ -8,11 +8,9 @@ export function AppLogo({ sidebarIsOpen }: AppLogoProps) {
       <div className="bg-primary text-primary-foreground flex h-8 w-8 items-center justify-center rounded-lg">
         <span className="text-sm font-bold">K</span>
       </div>
-      {sidebarIsOpen && (
-        <div className="flex flex-col">
-          <span className="text-sm font-semibold">Konlab CMS</span>
-        </div>
-      )}
+      <div className="flex flex-col">
+        <span className="text-sm font-semibold">Konlab CMS</span>
+      </div>
     </div>
   );
 }

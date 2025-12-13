@@ -1,0 +1,24 @@
+{
+  "name": "Báo A",
+  "pages": [
+    {
+      "path": "/profile2",
+      "type": "profile",
+      "title": "Hồ sơ"
+    },
+    {
+      "path": "/posts/list",
+      "type": "list",
+      "title": "Danh sách bài viết báo A",
+      "components": {
+        "columns": "CustomPostColumns"
+      }
+    },
+    {
+      "path": "/posts/detail",
+      "type": "detail",
+      "title": "Chi tiết bài viết"
+    }
+  ],
+  "plugins": ["tracking-analytics", "custom-menu"]
+}
