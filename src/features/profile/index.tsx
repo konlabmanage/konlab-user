@@ -1,7 +1,6 @@
 'use client';
 
 import { useMemo } from 'react';
-import { useAuth } from '@konlab/auth';
 import { Separator, Tabs, TabsContent, TabsList, TabsTrigger } from '@konlab/ui/components';
 import { SetBreadcrumbs, useLayoutContext } from '@konlab/ui/layouts/shared';
 import { User, Key, Shield } from 'lucide-react';
@@ -9,9 +8,10 @@ import { ProfileInfoForm } from './components/profile-info-form';
 import { ChangePasswordForm } from './components/change-password-form';
 import { TwoFactorAuthForm } from './components/two-factor-auth-form';
 import { ProfileHeader } from './components/profile-header';
+import { useUserInfo } from '../../hooks/use-user-info';
 
 export function ProfilePage() {
-  const { user } = useAuth();
+  const { user, loading } = useUserInfo(); // Fetch user từ API
   const { page } = useLayoutContext();
   const { Container: PageContainer, Section: PageSection, Content: PageContent } = page;
 
@@ -24,7 +24,13 @@ export function ProfilePage() {
       <PageContainer className="h-full min-h-0">
         {/* Section Top: Avatar và thông tin user */}
         <PageSection className="flex-shrink-0" aria-label="Thông tin người dùng">
-          <ProfileHeader user={user} />
+          {loading ? (
+            <div className="flex h-24 items-center justify-center">
+              <div className="text-muted-foreground text-sm">Đang tải...</div>
+            </div>
+          ) : (
+            <ProfileHeader user={user} />
+          )}
         </PageSection>
 
         {/* Section Bottom: Menu trái và Form phải */}

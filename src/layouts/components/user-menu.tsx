@@ -17,6 +17,7 @@ import { cn } from '@konlab/ui';
 import { useAuth } from '@konlab/auth';
 import { LogOut, Key, Shield, User } from 'lucide-react';
 import { useRouter } from 'next/navigation';
+import { useUserInfo } from '../../hooks/use-user-info';
 
 export interface UserMenuProps {
   /**
@@ -32,8 +33,9 @@ export interface UserMenuProps {
 /**
  * UserMenu component với avatar dropdown
  */
-export function UserMenu({ avatarUrl, className }: UserMenuProps) {
-  const { user, logout } = useAuth();
+export function UserMenu({ avatarUrl: propsAvatarUrl, className }: UserMenuProps) {
+  const { logout } = useAuth();
+  const { user } = useUserInfo(); // Fetch user từ API
   const router = useRouter();
 
   const userInitials = useMemo(() => {
@@ -51,6 +53,8 @@ export function UserMenu({ avatarUrl, className }: UserMenuProps) {
 
   const userName = user?.name || user?.preferred_username || 'Người dùng';
   const userEmail = user?.email || '';
+  // Ưu tiên avatar từ API, fallback về prop
+  const avatarUrl = (user as any)?.avatar || propsAvatarUrl;
 
   const handleProfileClick = () => {
     router.push('/profile');

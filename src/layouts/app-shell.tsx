@@ -17,7 +17,7 @@
 
 'use client';
 
-import { useMemo } from 'react';
+import { useMemo, useEffect } from 'react';
 import {
   ThemeProvider,
   Toaster,
@@ -25,12 +25,13 @@ import {
   type CMSLayoutProps,
   type SidebarMenuGroupType,
 } from '@konlab/ui';
-import { NextAuthProvider } from '@konlab/auth';
+import { NextAuthProvider, useAuth } from '@konlab/auth';
 import { NotificationButton, type NotificationButtonProps } from './components/notification-button';
 import { UserMenu, type UserMenuProps } from './components/user-menu';
 import { SearchBar, type SearchBarProps } from './components/search-bar';
 import { mainNavItems as defaultMainNavItems } from './components/nav';
 import { getDefaultAuthConfig } from '../config/auth.config';
+import { initializeAxios } from '../config/axios.config';
 
 export interface AppShellProps extends Omit<CMSLayoutProps, 'children' | 'mainNavItems'> {
   /**
@@ -83,6 +84,29 @@ function AppShellInner({
   searchBarProps,
   ...cmsLayoutProps
 }: Omit<AppShellProps, 'enableAuthGuard'>) {
+  const { keycloak, authenticated, logout } = useAuth();
+
+  // Initialize axios với Keycloak instance (chỉ một lần)
+  useEffect(() => {
+    if (keycloak && authenticated && keycloak.token) {
+      // Setup 401 handler trước khi init axios
+      const { setUnauthorizedCallback } = require('../lib/axios-client');
+      setUnauthorizedCallback(() => {
+        // Logout khi gặp 401
+        logout();
+      });
+
+      // Initialize axios (singleton pattern)
+      initializeAxios(keycloak);
+
+      if (process.env.NODE_ENV === 'development') {
+        // eslint-disable-next-line no-console
+        console.log('[AppShell] Axios initialized');
+      }
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []); // Empty deps - chỉ chạy một lần
+
   const notificationSlot = useMemo(
     () => <NotificationButton {...notificationButtonProps} />,
     [notificationButtonProps],
