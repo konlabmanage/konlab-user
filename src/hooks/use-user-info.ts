@@ -1,8 +1,8 @@
 import useSWR from 'swr';
 import { useAuth } from '@konlab/auth';
-import { type UserProfile } from '../services/user.service';
+import { UserService, type UserProfile } from '../services/user.service';
 import { createSWRKey } from '../utils/swr-key';
-import { fetcher } from '../lib/fetcher';
+import { isAxiosInitialized } from '../lib/axios-client';
 import { useMemo } from 'react';
 
 /**
@@ -29,21 +29,23 @@ function mergeUserData(
  */
 export function useUserInfo() {
   const { user: tokenUser, authenticated } = useAuth();
-  const userId = tokenUser?.sub;
 
-  // Generate SWR key - chỉ check business conditions
-  // Axios tự động handle token, không cần check thủ công
+  // Check axios ready để tránh fetch trước khi init
+  const axiosReady = isAxiosInitialized();
+
+  // Generate SWR key - check cả business và technical conditions
+  // Endpoint /v1/profile không cần userId vì lấy từ token
   const swrKey = useMemo(() => {
-    if (!authenticated || !userId) {
-      return null; // Skip fetch nếu chưa authenticated hoặc không có userId
+    if (!authenticated || !axiosReady) {
+      return null; // Skip fetch nếu chưa authenticated hoặc axios chưa ready
     }
-    return createSWRKey('users', userId);
-  }, [authenticated, userId]);
+    return createSWRKey('profile'); // Dùng /v1/profile endpoint
+  }, [authenticated, axiosReady]);
 
   // SWR với optimized config
   const { data, error, isLoading, mutate, isValidating } = useSWR<UserProfile>(
     swrKey,
-    fetcher, // Dùng generic fetcher
+    () => UserService.getProfile(), // Gọi từ UserService
     {
       // Performance
       revalidateOnFocus: false,

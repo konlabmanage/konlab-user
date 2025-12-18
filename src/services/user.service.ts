@@ -51,4 +51,13 @@ export class UserService {
     const response = await client.get<UserProfile>('/v1/users/me');
     return response.data;
   }
+
+  /**
+   * Lấy thông tin profile của user hiện tại
+   */
+  static async getProfile(): Promise<UserProfile> {
+    const client = getAxiosClient();
+    const response = await client.get<UserProfile>('/v1/profile');
+    return response.data;
+  }
 }

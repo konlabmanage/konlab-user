@@ -3,16 +3,23 @@
  * Best practice: Services không cần biết về axios init
  */
 
-import { getAxiosClient } from './axios-client';
+import { getAxiosClient, isAxiosInitialized } from './axios-client';
 
 /**
  * Generic fetcher cho SWR
  * Tự động sử dụng axios client với Keycloak token
+ * Gracefully handle khi axios chưa init (sẽ retry sau)
  *
  * @example
  * const { data } = useSWR('/api/users/123', fetcher)
  */
-export async function fetcher<T = any>(url: string): Promise<T> {
+export async function fetcher<T = unknown>(url: string): Promise<T> {
+  // Check axios ready trước khi fetch
+  if (!isAxiosInitialized()) {
+    // Throw error để SWR retry sau (khi axios đã init)
+    throw new Error('Axios client not ready yet, will retry');
+  }
+
   const client = getAxiosClient();
   const response = await client.get<T>(url);
   return response.data;
@@ -22,27 +29,27 @@ export async function fetcher<T = any>(url: string): Promise<T> {
  * Fetcher với method khác
  */
 export const fetcherFactory = {
-  get: <T = any>(url: string) => fetcher<T>(url),
+  get: <T = unknown>(url: string) => fetcher<T>(url),
 
   post:
-    <T = any>(url: string, data?: any) =>
-    async () => {
+    <T = unknown>(url: string, data?: unknown) =>
+    async (): Promise<T> => {
       const client = getAxiosClient();
       const response = await client.post<T>(url, data);
       return response.data;
     },
 
   put:
-    <T = any>(url: string, data?: any) =>
-    async () => {
+    <T = unknown>(url: string, data?: unknown) =>
+    async (): Promise<T> => {
       const client = getAxiosClient();
       const response = await client.put<T>(url, data);
       return response.data;
     },
 
   delete:
-    <T = any>(url: string) =>
-    async () => {
+    <T = unknown>(url: string) =>
+    async (): Promise<T> => {
       const client = getAxiosClient();
       const response = await client.delete<T>(url);
       return response.data;
